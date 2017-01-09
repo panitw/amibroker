@@ -1,6 +1,6 @@
 //SetOptions
 SetOption("InitialEquity", 100000);
-SetOption("MaxOpenPositions", 5);
+SetOption("MaxOpenPositions", 20);
 SetOption("MinShares", 100);
 RoundLotSize = 100;
 
@@ -19,7 +19,7 @@ SellPrice = Open;
 Sell = 0;
 
 //Position Sizing
-SetPositionSize(20, spsPercentOfEquity);
+SetPositionSize(5, spsPercentOfEquity);
 
 //Position Score
 PositionScore = Volume;
