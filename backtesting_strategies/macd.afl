@@ -1,0 +1,26 @@
+//SetOptions
+SetOption("InitialEquity", 100000);
+SetOption("MaxOpenPositions", 5);
+SetOption("MinShares", 100);
+RoundLotSize = 100;
+
+SetOption("CommissionMode", 1); //1 = Percent Of Trade
+SetOption("CommissionAmount", 0.1578);
+SetTradeDelays(1, 1, 0, 0);
+
+//Signals
+BuyPrice = Open;
+PriceInRange = Close < 50;
+Buy = Close >= HHV(Close, 25) && PriceInRange && PDI(200) > MDI(200);
+SellPrice = Open;
+Sell = 0;
+
+//Position Sizing
+SetPositionSize(20, spsPercentOfEquity);
+
+//Position Score
+PositionScore = Volume;
+
+//Apply Stop
+StopLength = 5 * ATR(14);
+ApplyStop(stopTypeTrailing, stopModePoint, StopLength, 2, True, 1);
