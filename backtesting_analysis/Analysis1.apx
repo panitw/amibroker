@@ -2,13 +2,13 @@
 <AmiBroker-Analysis CompactMode="0">
 <General>
 <FormatVersion>1</FormatVersion>
-<Symbol>AS</Symbol>
-<FormulaPath>C:\\projects\\amibroker\\backtesting_strategies\\macd.afl</FormulaPath>
-<FormulaContent>//SetOptions\r\nSetOption("InitialEquity", 100000);\r\nSetOption("MaxOpenPositions", 5);\r\nSetOption("MinShares", 100);\r\nRoundLotSize = 100;\r\n\r\nSetOption("CommissionMode", 1); //1 = Percent Of Trade\r\nSetOption("CommissionAmount", 0.1578);\r\nSetTradeDelays(1, 1, 0, 0);\r\n\r\n//Signals\r\nBuyPrice = Open;\r\nPriceInRange = Close &lt; 50;\r\nBuy = Close &gt;= HHV(Close, 25) &amp;&amp; PriceInRange &amp;&amp; PDI(200) &gt; MDI(200);\r\nSellPrice = Open;\r\nSell = 0;\r\n\r\n//Position Sizing\r\nSetPositionSize(20, spsPercentOfEquity);\r\n\r\n//Position Score\r\nPositionScore = Volume;\r\n\r\n//Apply Stop\r\nStopLength = 5 * ATR(14);\r\nApplyStop(stopTypeTrailing, stopModePoint, StopLength, 2, True, 1);\r\n</FormulaContent>
+<Symbol>CEN</Symbol>
+<FormulaPath>D:\\projects\\amibroker\\backtesting_strategies\\highest_high_atr_stop.afl</FormulaPath>
+<FormulaContent>//SetOptions\r\nSetOption("InitialEquity", 100000);\r\nSetOption("MaxOpenPositions", 5);\r\nSetOption("MinShares", 100);\r\nRoundLotSize = 100;\r\n\r\nSetOption("CommissionMode", 1); //1 = Percent Of Trade\r\nSetOption("CommissionAmount", 0.1578);\r\nSetTradeDelays(1, 1, 0, 0);\r\n\r\n//Signals\r\nBuyPrice = Open;\r\nPriceInRange = Close &lt;= 50;\r\nPositiveClose = (Close - Open) &gt; 0;\r\nBuy = Close &gt;= HHV(Close, 50) &amp;&amp; PriceInRange &amp;&amp; PositiveClose;\r\n\r\nSellPrice = Open;\r\nSell = 0;\r\n\r\n//Position Sizing\r\nSetPositionSize(20, spsPercentOfEquity);\r\n\r\n//Position Score\r\nPositionScore = Volume;\r\n\r\n//Apply Stop\r\nStopLength = 5 * ATR(21);\r\nApplyStop(stopTypeTrailing, stopModePoint, StopLength, 2, True, 1);\r\n</FormulaContent>
 <ApplyTo>0</ApplyTo>
 <RangeType>3</RangeType>
 <RangeAmount>7</RangeAmount>
-<FromDate>01/01/2011 00:00:00</FromDate>
+<FromDate>01/01/2006 00:00:00</FromDate>
 <ToDate>31/12/2016</ToDate>
 <SyncOnSelect>0</SyncOnSelect>
 <RunEvery>0</RunEvery>
@@ -189,7 +189,7 @@
 <MaxLongPos>0</MaxLongPos>
 <MaxShortPos>0</MaxShortPos>
 <SeparateLongShortRank>0</SeparateLongShortRank>
-<TotalSymbolQty>582</TotalSymbolQty>
+<TotalSymbolQty>580</TotalSymbolQty>
 <EnableUserReportCharts>1</EnableUserReportCharts>
 <ChartWidth>500</ChartWidth>
 <ChartHeight>300</ChartHeight>

@@ -9,9 +9,11 @@ SetOption("CommissionAmount", 0.1578);
 SetTradeDelays(1, 1, 0, 0);
 
 //Signals
-BuyPrice = Open;
-PriceInRange = Close < 50;
-Buy = Close >= HHV(Close, 25) && PriceInRange;
+BuyPrice = Close;
+PriceInRange = Close <= 50;
+PositiveClose = (Close - Open) > 0;
+PositiveDirection = PDI(14) > MDI(14);
+Buy = Close >= HHV(Close, 50) && PriceInRange && PositiveClose && PositiveDirection;
 
 SellPrice = Open;
 Sell = 0;
@@ -23,5 +25,5 @@ SetPositionSize(20, spsPercentOfEquity);
 PositionScore = Volume;
 
 //Apply Stop
-StopLength = 5 * ATR(14);
+StopLength = 5 * ATR(21);
 ApplyStop(stopTypeTrailing, stopModePoint, StopLength, 2, True, 1);
