@@ -18,6 +18,12 @@ Buy = Close >= HHV(Close, 50) && PriceInRange && PositiveClose && PositiveDirect
 SellPrice = Open;
 Sell = 0;
 
+//Add column for display
+Filter= Buy OR Sell;
+AddColumn(Close, "Close");
+AddColumn(Volume, "Volume");
+AddColumn( IIf( Buy, 66, 83 ), "Signal", formatChar );
+
 //Position Sizing
 SetPositionSize(5, spsPercentOfEquity);
 
