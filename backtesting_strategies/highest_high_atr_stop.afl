@@ -13,7 +13,8 @@ BuyPrice = Close;
 PriceInRange = Close <= 50;
 PositiveClose = (Close - Open) > 0;
 PositiveDirection = PDI(14) > MDI(14);
-Buy = Close >= HHV(Close, 50) && PriceInRange && PositiveClose && PositiveDirection;
+EnoughVolume = Volume > 100000;
+Buy = Close >= HHV(Close, 50) && PriceInRange && PositiveClose && PositiveDirection && EnoughVolume;
 
 SellPrice = Open;
 Sell = 0;
@@ -31,5 +32,5 @@ SetPositionSize(5, spsPercentOfEquity);
 PositionScore = Volume;
 
 //Apply Stop
-StopLength = 5 * ATR(21);
+StopLength = 3 * ATR(21);
 ApplyStop(stopTypeTrailing, stopModePoint, StopLength, 2, True, 1);
