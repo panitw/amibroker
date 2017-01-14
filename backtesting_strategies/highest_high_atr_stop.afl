@@ -15,7 +15,7 @@ PositiveClose = (Close - Open) > 0;
 PositiveDirection = PDI(14) > MDI(14);
 EnoughVolume = Volume > 100000;
 SET = Foreign("SET","Close",True);
-Bear = SET < MA(SET, 200);
+Bear = SET < MA(SET, 150);
 Buy = Close >= HHV(Close, 50) && PriceInRange && PositiveClose && PositiveDirection && EnoughVolume && (NOT Bear);
 
 SellPrice = Open;
