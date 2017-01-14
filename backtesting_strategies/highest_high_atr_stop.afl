@@ -13,10 +13,13 @@ BuyPrice = Close;
 PriceInRange = Close <= 50;
 PositiveClose = (Close - Open) > 0;
 PositiveDirection = PDI(14) > MDI(14);
+PositiveDirectionAggressive = PDI(100) > MDI(100);
 EnoughVolume = Volume > 100000;
 SET = Foreign("SET","Close",True);
 Bear = SET < MA(SET, 150);
-Buy = Close >= HHV(Close, 50) && PriceInRange && PositiveClose && PositiveDirection && EnoughVolume && (NOT Bear);
+BuyNormal = Close >= HHV(Close, 50) && PriceInRange && PositiveClose && PositiveDirection && EnoughVolume;
+BuyBear = Close >= HHV(Close, 400) && PriceInRange && PositiveClose && PositiveDirectionAggressive && EnoughVolume;
+Buy = IIf(Bear, BuyBear, BuyNormal);
 
 SellPrice = Open;
 Sell = 0;
