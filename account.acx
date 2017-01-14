@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Account CompactMode="1">
+	<Settings Name="Unnamed" Cash="0" InitialEquity="0" Equity="0" LastTransID="0" LastPosID="0" EODMode="1" LastTransDateTime="00:00:00"/>
+	<Commission>
+		<Item GroupID="0" TierMin="0" TierMax="0" PerShare="0" PerTrade="0" PcntOfValue="0" MinAmount="0" MinPercent="0" MaxAmount="0" MaxPercent="0"/>
+		<Item GroupID="0" TierMin="0" TierMax="0" PerShare="0" PerTrade="0" PcntOfValue="0" MinAmount="0" MinPercent="0" MaxAmount="0" MaxPercent="0"/>
+		<Item GroupID="0" TierMin="0" TierMax="0" PerShare="0" PerTrade="0" PcntOfValue="0" MinAmount="0" MinPercent="0" MaxAmount="0" MaxPercent="0"/>
+		<Item GroupID="0" TierMin="0" TierMax="0" PerShare="0" PerTrade="0" PcntOfValue="0" MinAmount="0" MinPercent="0" MaxAmount="0" MaxPercent="0"/>
+		<Item GroupID="0" TierMin="0" TierMax="0" PerShare="0" PerTrade="0" PcntOfValue="0" MinAmount="0" MinPercent="0" MaxAmount="0" MaxPercent="0"/>
+		<Item GroupID="0" TierMin="0" TierMax="0" PerShare="0" PerTrade="0" PcntOfValue="0" MinAmount="0" MinPercent="0" MaxAmount="0" MaxPercent="0"/>
+	</Commission>
+</Account>
