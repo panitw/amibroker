@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Account CompactMode="1">
-	<Settings Name="Unnamed" Cash="0" InitialEquity="0" Equity="0" LastTransID="0" LastPosID="0" EODMode="1" LastTransDateTime="00:00:00"/>
+	<Transactions>
+		<Item ID="9" DateTime="12/10/2016" Type="Sell" Symbol="SPI" Qty="100" Price="26.5" NetValue="2650" Commission="4.47442" GrossValue="2645.526" Currency="" FXRate="1"/>
+		<Item ID="8" DateTime="12/10/2016" Type="Sell" Symbol="TICON" Qty="300" Price="14.7" NetValue="4410" Commission="7.44611" GrossValue="4402.554" Currency="" FXRate="1"/>
+		<Item ID="7" DateTime="12/10/2016" Type="Sell" Symbol="HTC" Qty="300" Price="16.3" NetValue="4890" Commission="8.25657" GrossValue="4881.743" Currency="" FXRate="1"/>
+		<Item ID="6" DateTime="10/10/2016" Type="Buy" Symbol="BANPU" Qty="300" Price="16.5" NetValue="4950" Commission="8.35788" GrossValue="4958.358" Currency="" FXRate="1"/>
+		<Item ID="5" DateTime="10/10/2016" Type="Buy" Symbol="CPALL" Qty="100" Price="61.25" NetValue="6125" Commission="10.3418" GrossValue="6135.342" Currency="" FXRate="1"/>
+		<Item ID="4" DateTime="10/10/2016" Type="Buy" Symbol="HTC" Qty="300" Price="17.8" NetValue="5340" Commission="9.01638" GrossValue="5349.016" Currency="" FXRate="1"/>
+		<Item ID="3" DateTime="10/10/2016" Type="Buy" Symbol="SPI" Qty="100" Price="28.75" NetValue="2875" Commission="4.85432" GrossValue="2879.854" Currency="" FXRate="1"/>
+		<Item ID="2" DateTime="10/10/2016" Type="Buy" Symbol="TICON" Qty="300" Price="15.8" NetValue="4740" Commission="8.0033" GrossValue="4748.003" Currency="" FXRate="1"/>
+		<Item ID="1" DateTime="09/10/2016" Type="Deposit" Symbol="&lt;Funding&gt;" Qty="1" Price="28551.17" NetValue="28551.17" Commission="0" GrossValue="28551.17" Currency="" FXRate="1"/>
+	</Transactions>
+	<Positions>
+		<Item ID="3" Long="1" Open="1" Commission="10.3418" ExitProfit="0" MarginLoan="0" TotalEntryCost="6125" CurFxRate="1" CurPrice="62" CurrrencyRate="1" Deposit="61.25" EarlyExitFee="0" EntryFxRate="1" EntryPrice="61.25" EntryDateTime="10/10/2016" ExitFxRate="1" ExitPrice="0" ExitDateTime="01/01/1900 00:00:00" ExitShares="0" PointValue="1" Rank="0" RoundLotSize="0" Shares="100" TickSize="0" Bars="1" ScaleInCount="0" ScaleOutCount="0" SymbolID="94" Symbol="CPALL" TransIDs="5"/>
+		<Item ID="4" Long="1" Open="1" Commission="8.35788" ExitProfit="0" MarginLoan="0" TotalEntryCost="4950" CurFxRate="1" CurPrice="19.6" CurrrencyRate="1" Deposit="16.5" EarlyExitFee="0" EntryFxRate="1" EntryPrice="16.5" EntryDateTime="10/10/2016" ExitFxRate="1" ExitPrice="0" ExitDateTime="01/01/1900 00:00:00" ExitShares="0" PointValue="1" Rank="0" RoundLotSize="0" Shares="300" TickSize="0" Bars="1" ScaleInCount="0" ScaleOutCount="0" SymbolID="41" Symbol="BANPU" TransIDs="6"/>
+	</Positions>
+	<Trades>
+		<Item ID="2" Long="1" Open="0" Commission="9.01638" ExitProfit="0" MarginLoan="0" TotalEntryCost="5340" CurFxRate="1" CurPrice="16.3" CurrrencyRate="1" Deposit="17.8" EarlyExitFee="0" EntryFxRate="1" EntryPrice="17.8" EntryDateTime="10/10/2016" ExitFxRate="1" ExitPrice="16.3" ExitDateTime="12/10/2016" ExitShares="300" PointValue="1" Rank="0" RoundLotSize="0" Shares="300" TickSize="0" Bars="1" ScaleInCount="0" ScaleOutCount="0" SymbolID="179" Symbol="HTC" TransIDs="4,7"/>
+		<Item ID="0" Long="1" Open="0" Commission="8.0033" ExitProfit="0" MarginLoan="0" TotalEntryCost="4740" CurFxRate="1" CurPrice="14.7" CurrrencyRate="1" Deposit="15.8" EarlyExitFee="0" EntryFxRate="1" EntryPrice="15.8" EntryDateTime="10/10/2016" ExitFxRate="1" ExitPrice="14.7" ExitDateTime="12/10/2016" ExitShares="300" PointValue="1" Rank="0" RoundLotSize="0" Shares="300" TickSize="0" Bars="1" ScaleInCount="0" ScaleOutCount="0" SymbolID="480" Symbol="TICON" TransIDs="2,8"/>
+		<Item ID="1" Long="1" Open="0" Commission="4.85432" ExitProfit="0" MarginLoan="0" TotalEntryCost="2875" CurFxRate="1" CurPrice="26.5" CurrrencyRate="1" Deposit="28.75" EarlyExitFee="0" EntryFxRate="1" EntryPrice="28.75" EntryDateTime="10/10/2016" ExitFxRate="1" ExitPrice="26.5" ExitDateTime="12/10/2016" ExitShares="100" PointValue="1" Rank="0" RoundLotSize="0" Shares="100" TickSize="0" Bars="1" ScaleInCount="0" ScaleOutCount="0" SymbolID="419" Symbol="SPI" TransIDs="3,9"/>
+	</Trades>
+	<Equity>
+		<Item ID="8" DateTime="12/10/2016" Equity=" 28470.05" Cash=" 16410.45" OpenPosQty="2" OpenPosVal=" 12059.60" LongPosQty="2" LongPosVal=" 12059.60" ShortPosQty="0" ShortPosVal="     0.00" TransID="9"/>
+		<Item ID="7" DateTime="12/10/2016" Equity=" 29193.83" Cash=" 13764.92" OpenPosQty="3" OpenPosVal=" 15428.90" LongPosQty="3" LongPosVal=" 15428.90" ShortPosQty="0" ShortPosVal="     0.00" TransID="8"/>
+		<Item ID="6" DateTime="12/10/2016" Equity=" 29912.61" Cash="  9362.37" OpenPosQty="4" OpenPosVal=" 20550.24" LongPosQty="4" LongPosVal=" 20550.24" ShortPosQty="0" ShortPosVal="     0.00" TransID="7"/>
+		<Item ID="5" DateTime="10/10/2016" Equity=" 30182.16" Cash="  4480.63" OpenPosQty="5" OpenPosVal=" 25701.53" LongPosQty="5" LongPosVal=" 25701.53" ShortPosQty="0" ShortPosVal="     0.00" TransID="6"/>
+		<Item ID="4" DateTime="10/10/2016" Equity=" 29270.44" Cash="  9438.98" OpenPosQty="4" OpenPosVal=" 19831.46" LongPosQty="4" LongPosVal=" 19831.46" ShortPosQty="0" ShortPosVal="     0.00" TransID="5"/>
+		<Item ID="3" DateTime="10/10/2016" Equity=" 29216.25" Cash=" 15574.33" OpenPosQty="3" OpenPosVal=" 13641.93" LongPosQty="3" LongPosVal=" 13641.93" ShortPosQty="0" ShortPosVal="     0.00" TransID="4"/>
+		<Item ID="2" DateTime="10/10/2016" Equity=" 29413.98" Cash=" 20923.34" OpenPosQty="2" OpenPosVal="  8490.64" LongPosQty="2" LongPosVal="  8490.64" ShortPosQty="0" ShortPosVal="     0.00" TransID="3"/>
+		<Item ID="1" DateTime="10/10/2016" Equity=" 28924.53" Cash=" 23803.20" OpenPosQty="1" OpenPosVal="  5121.34" LongPosQty="1" LongPosVal="  5121.34" ShortPosQty="0" ShortPosVal="     0.00" TransID="2"/>
+		<Item ID="0" DateTime="09/10/2016" Equity="28551.17" Cash="28551.17" OpenPosQty="0" OpenPosVal="0" LongPosQty="0" LongPosVal="0" ShortPosQty="0" ShortPosVal="0" TransID="1"/>
+	</Equity>
+	<Settings Name="Account 1" Cash="16410.4" InitialEquity="28551.2" Equity="28470.1" LastTransID="9" LastPosID="5" EODMode="1" LastTransDateTime="2016-12-10"/>
 	<Commission>
-		<Item GroupID="0" TierMin="0" TierMax="0" PerShare="0" PerTrade="0" PcntOfValue="0" MinAmount="0" MinPercent="0" MaxAmount="0" MaxPercent="0"/>
+		<Item GroupID="0" TierMin="0" TierMax="0" PerShare="0" PerTrade="0" PcntOfValue="0.168846" MinAmount="0" MinPercent="0" MaxAmount="0" MaxPercent="0"/>
 		<Item GroupID="0" TierMin="0" TierMax="0" PerShare="0" PerTrade="0" PcntOfValue="0" MinAmount="0" MinPercent="0" MaxAmount="0" MaxPercent="0"/>
 		<Item GroupID="0" TierMin="0" TierMax="0" PerShare="0" PerTrade="0" PcntOfValue="0" MinAmount="0" MinPercent="0" MaxAmount="0" MaxPercent="0"/>
 		<Item GroupID="0" TierMin="0" TierMax="0" PerShare="0" PerTrade="0" PcntOfValue="0" MinAmount="0" MinPercent="0" MaxAmount="0" MaxPercent="0"/>
