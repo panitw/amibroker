@@ -1,0 +1,6 @@
+function PositiveRatio(input) {
+	for (i=0; i<BarCount; i++) {
+		result[i] = input[i];
+	}
+	return result;
+}

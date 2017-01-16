@@ -36,7 +36,7 @@ AddColumn( IIf( Buy, 66, 83 ), "Signal", formatChar );
 SetPositionSize(5, spsPercentOfEquity);
 
 //Position Score
-PositionScore = PositionScore = ROC(Close,1) * -1;
+PositionScore = PositionScore = ROC(Close, 1) * -1;
 
 //Apply Stop
 StopLength = 3 * ATR(21);
