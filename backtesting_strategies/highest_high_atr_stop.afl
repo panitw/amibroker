@@ -8,6 +8,9 @@ SetOption("CommissionMode", 1); //1 = Percent Of Trade
 SetOption("CommissionAmount", 0.1578);
 SetTradeDelays(1, 1, 0, 0);
 
+//Position Score
+PositionScore = PositionScore = ROC(Close, 1) * -1;
+
 //Signals
 BuyPrice = Close;
 PriceInRange = Close <= 50;
@@ -19,25 +22,24 @@ HighestHighAggressive = Close >= HHV(Close, 400);
 EnoughVolume = Volume > 100000;
 SET = Foreign("SET","Close",True);
 Bear = SET < MA(SET, 150);
-BuyNormal = HighestHigh && PriceInRange && PositiveClose && PositiveDirection && EnoughVolume;
-BuyBear = HighestHighAggressive && PriceInRange && PositiveClose && PositiveDirectionAggressive && EnoughVolume;
+ScoreNotZero = PositionScore < 0;
+BuyNormal = HighestHigh && PriceInRange && PositiveClose && PositiveDirection && EnoughVolume && ScoreNotZero;
+BuyBear = HighestHighAggressive && PriceInRange && PositiveClose && PositiveDirectionAggressive && EnoughVolume && ScoreNotZero;
 Buy = IIf(Bear, BuyBear, BuyNormal);
 
 SellPrice = Open;
 Sell = 0;
 
-//Add column for display
-Filter= Buy OR Sell;
-AddColumn(Close, "Close");
-AddColumn(Volume, "Volume");
-AddColumn( IIf( Buy, 66, 83 ), "Signal", formatChar );
-
 //Position Sizing
 SetPositionSize(5, spsPercentOfEquity);
-
-//Position Score
-PositionScore = PositionScore = ROC(Close, 1) * -1;
 
 //Apply Stop
 StopLength = 3 * ATR(21);
 ApplyStop(stopTypeTrailing, stopModePoint, StopLength, 2, True, 1);
+
+//Add column for display
+Filter= Buy OR Sell;
+AddColumn(Close, "Close");
+AddColumn(Volume, "Volume");
+AddColumn(IIF( Buy, 66, 83 ), "Signal", formatChar );
+AddColumn(PositionScore, "Score");
