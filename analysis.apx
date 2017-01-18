@@ -2,11 +2,11 @@
 <AmiBroker-Analysis CompactMode="0">
 <General>
 <FormatVersion>1</FormatVersion>
-<Symbol>IRPC</Symbol>
+<Symbol>MONO</Symbol>
 <FormulaPath>D:\\projects\\amibroker\\backtesting_strategies\\highest_high_atr_stop.afl</FormulaPath>
-<FormulaContent>//SetOptions\r\nSetOption("InitialEquity", 100000);\r\nSetOption("MaxOpenPositions", 20);\r\nSetOption("MinShares", 100);\r\nRoundLotSize = 100;\r\n\r\nSetOption("CommissionMode", 1); //1 = Percent Of Trade\r\nSetOption("CommissionAmount", 0.1578);\r\nSetTradeDelays(1, 1, 0, 0);\r\n\r\n//Signals\r\nBuyPrice = Close * 1.01;\r\nPriceInRange = Close &lt;= 50;\r\nPositiveClose = (Close - Open) &gt; 0;\r\nPositiveDirection = PDI(14) &gt; MDI(14);\r\nPositiveDirectionAggressive = PDI(100) &gt; MDI(100);\r\nHighestHigh = HHV(Close, 50);\r\nHighestHighAggressive = HHV(Close, 400);\r\nIsHighestHigh = Close &gt;= HighestHigh;\r\nIsHighestHighAggressive = Close &gt;= HighestHighAggressive;\r\nEnoughVolume = Volume &gt; 100000;\r\nSET = Foreign("SET","Close",True);\r\nBear = SET &lt; MA(SET, 150);\r\nBuyNormal = IsHighestHigh &amp;&amp; PriceInRange &amp;&amp; PositiveClose &amp;&amp; PositiveDirection &amp;&amp; EnoughVolume;\r\nBuyBear = IsHighestHighAggressive &amp;&amp; PriceInRange &amp;&amp; PositiveClose &amp;&amp; PositiveDirectionAggressive &amp;&amp; EnoughVolume;\r\nBuy = IIf(Bear, False, BuyNormal);\r\n\r\nSellPrice = Open * 0.99;\r\nSell = 0;\r\n\r\n//Position Sizing\r\nSetPositionSize(5, spsPercentOfEquity);\r\n\r\n//Position Score\r\nPositionScore = Volume;\r\n\r\n//Apply Stop\r\nStopLength = 3 * ATR(21);\r\nApplyStop(stopTypeTrailing, stopModePoint, StopLength, 2, True, 1);\r\n\r\n//Add column for display\r\nFilter= Buy OR Sell;\r\nAddColumn(Close, "Close");\r\nAddColumn(Volume, "Volume");\r\nAddColumn(IIf( Buy, 66, 83 ), "Signal", formatChar );\r\nAddColumn(PositionScore, "Score");\r\nAddColumn(IIf(Bear, HighestHighAggressive, HighestHigh) - StopLength, "CutAt");\r\n</FormulaContent>
+<FormulaContent>//SetOptions\r\nSetOption("InitialEquity", 100000);\r\nSetOption("MaxOpenPositions", 20);\r\nSetOption("MinShares", 100);\r\nRoundLotSize = 100;\r\n\r\nSetOption("CommissionMode", 1); //1 = Percent Of Trade\r\nSetOption("CommissionAmount", 0.1578);\r\nSetTradeDelays(1, 1, 0, 0);\r\n\r\n//Signals\r\nBuyPrice = Close * 1.01;\r\nPriceInRange = Close &lt;= 50;\r\nPositiveClose = (Close - Open) &gt; 0;\r\nPositiveDirection = PDI(14) &gt; MDI(14);\r\nPositiveDirectionAggressive = PDI(100) &gt; MDI(100);\r\nHighestHigh = HHV(Close, 50);\r\nHighestHighAggressive = HHV(Close, 400);\r\nIsHighestHigh = Close &gt;= HighestHigh;\r\nIsHighestHighAggressive = Close &gt;= HighestHighAggressive;\r\nEnoughVolume = Volume &gt; 100000;\r\nSET = Foreign("SET","Close",True);\r\nBear = SET &lt; MA(SET, 150);\r\nBuyNormal = IsHighestHigh &amp;&amp; PriceInRange &amp;&amp; PositiveClose &amp;&amp; PositiveDirection &amp;&amp; EnoughVolume;\r\nBuyBear = IsHighestHighAggressive &amp;&amp; PriceInRange &amp;&amp; PositiveClose &amp;&amp; PositiveDirectionAggressive &amp;&amp; EnoughVolume;\r\nBuy = IIf(Bear, BuyBear, BuyNormal);\r\n\r\nSellPrice = Open;\r\nSell = 0;\r\n\r\n//Position Sizing\r\nSetPositionSize(5, spsPercentOfEquity);\r\n\r\n//Position Score\r\nPositionScore = Volume;\r\n\r\n//Apply Stop\r\nStopLength = 3 * ATR(21);\r\nApplyStop(stopTypeTrailing, stopModePoint, StopLength, 2, True, 1);\r\n\r\n//Add column for display\r\nFilter= Buy OR Sell;\r\nAddColumn(Close, "Close");\r\nAddColumn(Volume, "Volume");\r\nAddColumn(IIf( Buy, 66, 83 ), "Signal", formatChar );\r\nAddColumn(PositionScore, "Score");\r\nAddColumn(IIf(Bear, HighestHighAggressive, HighestHigh) - StopLength, "CutAt");\r\n</FormulaContent>
 <ApplyTo>0</ApplyTo>
-<RangeType>3</RangeType>
+<RangeType>1</RangeType>
 <RangeAmount>1</RangeAmount>
 <FromDate>01/01/2006 00:00:00</FromDate>
 <ToDate>31/12/2016</ToDate>
@@ -89,9 +89,9 @@
 <UseConstantPriceArrays>0</UseConstantPriceArrays>
 <PointsOnlyTest>0</PointsOnlyTest>
 <AllowShrinkingPosition>0</AllowShrinkingPosition>
-<RangeType>3</RangeType>
+<RangeType>1</RangeType>
 <RangeLength>0</RangeLength>
-<RangeFromDate>01/01/2011 00:00:00</RangeFromDate>
+<RangeFromDate>01/01/2006 00:00:00</RangeFromDate>
 <RangeToDate>31/12/2016</RangeToDate>
 <ApplyTo>0</ApplyTo>
 <FilterQty>2</FilterQty>
@@ -138,7 +138,7 @@
 <UseOptimizedEvaluation>0</UseOptimizedEvaluation>
 <BacktestRangeType>3</BacktestRangeType>
 <BacktestRangeLength>0</BacktestRangeLength>
-<BacktestRangeFromDate>01/01/2011 00:00:00</BacktestRangeFromDate>
+<BacktestRangeFromDate>01/01/2006 00:00:00</BacktestRangeFromDate>
 <BacktestRangeToDate>31/12/2016</BacktestRangeToDate>
 <MarginRequirement>100</MarginRequirement>
 <SameDayStops>0</SameDayStops>
@@ -189,7 +189,7 @@
 <MaxLongPos>0</MaxLongPos>
 <MaxShortPos>0</MaxShortPos>
 <SeparateLongShortRank>0</SeparateLongShortRank>
-<TotalSymbolQty>581</TotalSymbolQty>
+<TotalSymbolQty>582</TotalSymbolQty>
 <EnableUserReportCharts>1</EnableUserReportCharts>
 <ChartWidth>500</ChartWidth>
 <ChartHeight>300</ChartHeight>
