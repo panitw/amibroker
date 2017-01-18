@@ -8,23 +8,21 @@ SetOption("CommissionMode", 1); //1 = Percent Of Trade
 SetOption("CommissionAmount", 0.1578);
 SetTradeDelays(1, 1, 0, 0);
 
-//Position Score
-PositionScore = PositionScore = ROC(Close, 1) * -1;
-
 //Signals
-BuyPrice = Close;
+BuyPrice = Close * 1.01;
 PriceInRange = Close <= 50;
 PositiveClose = (Close - Open) > 0;
 PositiveDirection = PDI(14) > MDI(14);
 PositiveDirectionAggressive = PDI(100) > MDI(100);
-HighestHigh = Close >= HHV(Close, 50);
-HighestHighAggressive = Close >= HHV(Close, 400);
+HighestHigh = HHV(Close, 50);
+HighestHighAggressive = HHV(Close, 400);
+IsHighestHigh = Close >= HighestHigh;
+IsHighestHighAggressive = Close >= HighestHighAggressive;
 EnoughVolume = Volume > 100000;
 SET = Foreign("SET","Close",True);
 Bear = SET < MA(SET, 150);
-ScoreNotZero = PositionScore < 0;
-BuyNormal = HighestHigh && PriceInRange && PositiveClose && PositiveDirection && EnoughVolume && ScoreNotZero;
-BuyBear = HighestHighAggressive && PriceInRange && PositiveClose && PositiveDirectionAggressive && EnoughVolume && ScoreNotZero;
+BuyNormal = IsHighestHigh && PriceInRange && PositiveClose && PositiveDirection && EnoughVolume;
+BuyBear = IsHighestHighAggressive && PriceInRange && PositiveClose && PositiveDirectionAggressive && EnoughVolume;
 Buy = IIf(Bear, BuyBear, BuyNormal);
 
 SellPrice = Open;
@@ -32,6 +30,9 @@ Sell = 0;
 
 //Position Sizing
 SetPositionSize(5, spsPercentOfEquity);
+
+//Position Score
+PositionScore = Volume;
 
 //Apply Stop
 StopLength = 3 * ATR(21);
@@ -41,5 +42,6 @@ ApplyStop(stopTypeTrailing, stopModePoint, StopLength, 2, True, 1);
 Filter= Buy OR Sell;
 AddColumn(Close, "Close");
 AddColumn(Volume, "Volume");
-AddColumn(IIF( Buy, 66, 83 ), "Signal", formatChar );
+AddColumn(IIf( Buy, 66, 83 ), "Signal", formatChar );
 AddColumn(PositionScore, "Score");
+AddColumn(IIf(Bear, HighestHighAggressive, HighestHigh) - StopLength, "CutAt");
