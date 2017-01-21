@@ -14,10 +14,12 @@ SellPrice = Open;
 PriceInRange = Close < 50;
 EnoughVolume = Volume > 1000000;
 HaveMomentum = StochK(14,3) > 80;
-LostMomentum = StochK(14,3) < 20;
+LostMomentum = StochK(14,3) < 50;
 UpTrend = PDI(14) > MDI(14);
 DownTrend = PDI(14) < MDI(14);
-Buy = PriceInRange && EnoughVolume && UpTrend && HaveMomentum;
+SET = Foreign("SET","Close",True);
+Bear = SET < MA(SET, 150);
+Buy = PriceInRange && EnoughVolume && UpTrend && HaveMomentum && NOT Bear;
 Sell = DownTrend || LostMomentum;
 
 //Position Sizing
@@ -27,5 +29,12 @@ SetPositionSize(5, spsPercentOfEquity);
 PositionScore = Volume;
 
 //Apply Stop
-stopPoint = LLV(Close, 5);
+stopPoint = LLV(Close, 10);
 ApplyStop(stopTypeTrailing, stopModePoint, stopPoint, 2, True, 1);
+
+//Add column for display
+Filter= Buy;
+AddColumn(Close, "Close");
+AddColumn(Volume, "Volume");
+AddColumn(IIf( Buy, 66, 83 ), "Signal", formatChar );
+AddColumn(PositionScore, "Score");
