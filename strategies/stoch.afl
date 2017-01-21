@@ -1,0 +1,36 @@
+//SetOptions
+SetOption("InitialEquity", 100000);
+SetOption("MaxOpenPositions", 20);
+SetOption("MinShares", 100);
+RoundLotSize = 100;
+
+SetOption("CommissionMode", 1); //1 = Percent Of Trade
+SetOption("CommissionAmount", 0.2);
+SetTradeDelays(1, 1, 0, 0);
+
+//Signals
+BuyPrice = Close;
+SellPrice = Open;
+PriceInRange = Close < 100 && Close > 0.5;
+EnoughVolume = Volume > 1000000;
+STOK = StochK(21,3);
+STOD = StochD(21,3,3);
+OverSold = STOK < 20 && STOD < 20;
+OverBought = STOK > 80 && STOD > 80;
+CrossUp = Cross(STOK, STOD);
+CrossDown = Cross(STOD, STOK);
+UpTrend = PDI(14) > MDI(14);
+DownTrend = PDI(14) < MDI(14);
+TakeProfit = RSI(14) > 70;
+Buy = PriceInRange && CrossUp && EnoughVolume && OverSold && UpTrend;
+Sell = (CrossDown && OverBought) || TakeProfit || DownTrend;
+
+//Position Sizing
+SetPositionSize(5, spsPercentOfEquity);
+
+//Position Score
+PositionScore = Volume;
+
+//Apply Stop
+stopPoint = LLV(Close, 20);
+ApplyStop(stopTypeTrailing, stopModePoint, stopPoint, 2, True, 1);

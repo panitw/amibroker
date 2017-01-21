@@ -5,11 +5,11 @@ SetOption("MinShares", 100);
 RoundLotSize = 100;
 
 SetOption("CommissionMode", 1); //1 = Percent Of Trade
-SetOption("CommissionAmount", 0.1578);
+SetOption("CommissionAmount", 0.2);
 SetTradeDelays(1, 1, 0, 0);
 
 //Signals
-BuyPrice = Close * 1.01;
+BuyPrice = Close;
 PriceInRange = Close <= 50;
 PositiveClose = (Close - Open) > 0;
 PositiveDirection = PDI(14) > MDI(14);
