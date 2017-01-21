@@ -12,9 +12,9 @@ SetTradeDelays(1, 1, 0, 0);
 BuyPrice = Close;
 SellPrice = Open;
 PriceInRange = Close < 50;
-EnoughVolume = Volume > 100000;
-HaveMomentum = StochK(9,3) > 80;
-LostMomentum = StochK(9,3) < 20;
+EnoughVolume = Volume > 1000000;
+HaveMomentum = StochK(14,3) > 80;
+LostMomentum = StochK(14,3) < 20;
 UpTrend = PDI(14) > MDI(14);
 DownTrend = PDI(14) < MDI(14);
 Buy = PriceInRange && EnoughVolume && UpTrend && HaveMomentum;
@@ -27,5 +27,5 @@ SetPositionSize(5, spsPercentOfEquity);
 PositionScore = Volume;
 
 //Apply Stop
-stopPoint = LLV(Close, 10);
+stopPoint = LLV(Close, 5);
 ApplyStop(stopTypeTrailing, stopModePoint, stopPoint, 2, True, 1);
