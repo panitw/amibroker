@@ -38,3 +38,4 @@ AddColumn(Close, "Close");
 AddColumn(Volume, "Volume");
 AddColumn(IIf( Buy, 66, 83 ), "Signal", formatChar );
 AddColumn(PositionScore, "Score");
+AddColumn(StochK(14,3), "Momentum");
