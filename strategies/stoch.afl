@@ -8,6 +8,9 @@ SetOption("CommissionMode", 1); //1 = Percent Of Trade
 SetOption("CommissionAmount", 0.2);
 SetTradeDelays(1, 1, 0, 0);
 
+//Position Score
+PositionScore =  ((Volume - Ref(Volume, -1)) / Ref(Volume, -1)) * -1;
+
 //Signals
 BuyPrice = Close;
 SellPrice = Open;
@@ -26,11 +29,9 @@ Sell = DownTrend || LostMomentum;
 //Position Sizing
 SetPositionSize(5, spsPercentOfEquity);
 
-//Position Score
-PositionScore =  Volume;
 
 //Apply Stop
-stopPoint = LLV(Close, 15);
+stopPoint = LLV(Close, 27);
 ApplyStop(stopTypeTrailing, stopModePoint, stopPoint, 2, True, 1);
 
 //Add column for display
