@@ -9,7 +9,7 @@ SetOption("CommissionAmount", 0.2);
 SetTradeDelays(1, 1, 0, 0);
 
 //Position Score
-PositionScore =  ((Volume - Ref(Volume, -1)) / Ref(Volume, -1)) * -1;
+PositionScore =  StochK(14,3);
 
 //Signals
 BuyPrice = Close;
