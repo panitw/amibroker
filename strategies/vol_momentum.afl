@@ -1,0 +1,36 @@
+//SetOptions
+SetOption("InitialEquity", 100000);
+SetOption("MaxOpenPositions", 20);
+SetOption("MinShares", 100);
+RoundLotSize = 100;
+
+SetOption("CommissionMode", 1); //1 = Percent Of Trade
+SetOption("CommissionAmount", 0.2);
+SetTradeDelays(1, 1, 0, 0);
+
+//Market Condition
+SET = Foreign("SET","Close",True);
+Bear = SET < MA(SET, 100);
+
+//Signals
+
+PositiveClose = Close > Open;
+Buy = VolSpike && PositiveClose && EnoughVolume && PrevVolNotZero && NOT Bear && SpikeSize > 400;
+BuyPrice = Open;
+Sell = 0;
+SellPrice = Open;
+
+//Position Sizing
+SetPositionSize(5, spsPercentOfEquity);
+
+//Position Score
+PositionScore =  SpikeSize * -1;
+
+//Apply Stop
+ApplyStop(stopTypeTrailing, stopModePercent, 15, 2, True, 1);
+
+//Add column for display
+Filter= Buy;
+AddColumn(Close, "Close");
+AddColumn(Volume, "Volume");
+AddColumn(PositionScore, "Score");

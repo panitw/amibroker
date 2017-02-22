@@ -9,7 +9,7 @@ SetOption("CommissionAmount", 0.2);
 SetTradeDelays(1, 1, 0, 0);
 
 //Position Score
-PositionScore =  StochK(14,3);
+PositionScore =  StochK(14, 3);
 
 //Signals
 BuyPrice = Close;
@@ -19,12 +19,14 @@ PositiveClose = Close > Open;
 EnoughVolume = Volume > 1000000;
 HaveMomentum = StochK(14,3) > 80;
 LostMomentum = StochK(14,3) < 50;
-UpTrend = PDI(14) > MDI(14);
-DownTrend = PDI(14) < MDI(14);
+PlusDI = PDI(14);
+MinusDI = MDI(14);
+UpTrend = PlusDI > MinusDI;
+DownTrend = PlusDI < MinusDI;
 SET = Foreign("SET","Close",True);
 Bear = SET < MA(SET, 150);
 Buy = PriceInRange && EnoughVolume && UpTrend && HaveMomentum && NOT Bear;
-Sell = DownTrend || LostMomentum;
+Sell = DownTrend && LostMomentum;
 
 //Position Sizing
 SetPositionSize(5, spsPercentOfEquity);
@@ -41,3 +43,6 @@ AddColumn(Volume, "Volume");
 AddColumn(IIf( Buy, 66, 83 ), "Signal", formatChar );
 AddColumn(PositionScore, "Score");
 AddColumn(StochK(14,3), "Momentum");
+AddColumn(UpTrend, "UpTrend");
+AddColumn(PlusDI, "+DI");
+AddColumn(MinusDI, "-DI");
