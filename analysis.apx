@@ -2,11 +2,11 @@
 <AmiBroker-Analysis CompactMode="0">
 <General>
 <FormatVersion>1</FormatVersion>
-<Symbol>KSL</Symbol>
+<Symbol>MBKET</Symbol>
 <FormulaPath>D:\\projects\\amibroker\\strategies\\stoch.afl</FormulaPath>
 <FormulaContent>//SetOptions\r\nSetOption("InitialEquity", 100000);\r\nSetOption("MaxOpenPositions", 20);\r\nSetOption("MinShares", 100);\r\nRoundLotSize = 100;\r\n\r\nSetOption("CommissionMode", 1); //1 = Percent Of Trade\r\nSetOption("CommissionAmount", 0.2);\r\nSetTradeDelays(1, 1, 0, 0);\r\n\r\n//Position Score\r\nPositionScore =  StochK(14, 3);\r\n\r\n//Signals\r\nBuyPrice = Close;\r\nSellPrice = Open;\r\nPriceInRange = Close &lt; 50;\r\nPositiveClose = Close &gt; Open;\r\nEnoughVolume = Volume &gt; 1000000;\r\nHaveMomentum = StochK(14,3) &gt; 80;\r\nLostMomentum = StochK(14,3) &lt; 50;\r\nPlusDI = PDI(14);\r\nMinusDI = MDI(14);\r\nUpTrend = PlusDI &gt; MinusDI;\r\nDownTrend = PlusDI &lt; MinusDI;\r\nSET = Foreign("SET","Close",True);\r\nBear = SET &lt; MA(SET, 150);\r\nBuy = PriceInRange &amp;&amp; EnoughVolume &amp;&amp; UpTrend &amp;&amp; HaveMomentum &amp;&amp; NOT Bear;\r\nSell = DownTrend &amp;&amp; LostMomentum;\r\n\r\n//Position Sizing\r\nSetPositionSize(5, spsPercentOfEquity);\r\n\r\n\r\n//Apply Stop\r\nstopPoint = LLV(Close, 27);\r\nApplyStop(stopTypeTrailing, stopModePoint, stopPoint, 2, True, 1);\r\n\r\n//Add column for display\r\nFilter= Buy;\r\nAddColumn(Close, "Close");\r\nAddColumn(Volume, "Volume");\r\nAddColumn(IIf( Buy, 66, 83 ), "Signal", formatChar );\r\nAddColumn(PositionScore, "Score");\r\nAddColumn(StochK(14,3), "Momentum");\r\nAddColumn(UpTrend, "UpTrend");\r\nAddColumn(PlusDI, "+DI");\r\nAddColumn(MinusDI, "-DI");\r\n</FormulaContent>
 <ApplyTo>0</ApplyTo>
-<RangeType>1</RangeType>
+<RangeType>3</RangeType>
 <RangeAmount>1</RangeAmount>
 <FromDate>01/01/2006 00:00:00</FromDate>
 <ToDate>31/12/2016</ToDate>
@@ -89,7 +89,7 @@
 <UseConstantPriceArrays>0</UseConstantPriceArrays>
 <PointsOnlyTest>0</PointsOnlyTest>
 <AllowShrinkingPosition>0</AllowShrinkingPosition>
-<RangeType>1</RangeType>
+<RangeType>3</RangeType>
 <RangeLength>0</RangeLength>
 <RangeFromDate>01/01/2006 00:00:00</RangeFromDate>
 <RangeToDate>31/12/2016</RangeToDate>
@@ -189,7 +189,7 @@
 <MaxLongPos>0</MaxLongPos>
 <MaxShortPos>0</MaxShortPos>
 <SeparateLongShortRank>0</SeparateLongShortRank>
-<TotalSymbolQty>587</TotalSymbolQty>
+<TotalSymbolQty>586</TotalSymbolQty>
 <EnableUserReportCharts>1</EnableUserReportCharts>
 <ChartWidth>500</ChartWidth>
 <ChartHeight>300</ChartHeight>
