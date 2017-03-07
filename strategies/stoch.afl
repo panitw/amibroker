@@ -14,7 +14,8 @@ BuyPrice = Close;
 SellPrice = Open;
 PriceInRange = Close < 50;
 PositiveClose = Close > Open;
-EnoughVolume = MA(Volume, 20) > 500000;
+EnoughVolume = Volume > 1000000;
+EnoughAvgVolume = MA(Volume, 20) > 500000;
 HaveMomentum = Stoch > 80;
 LostMomentum = Stoch < 50;
 MomentumIncreasing = Stoch > Ref(Stoch, -1);
@@ -24,7 +25,7 @@ UpTrend = PlusDI > MinusDI;
 DownTrend = PlusDI < MinusDI;
 SET = Foreign("SET","Close",True);
 Bear = SET < MA(SET, 150);
-Buy = PriceInRange && EnoughVolume && UpTrend && HaveMomentum && MomentumIncreasing && NOT Bear;
+Buy = PriceInRange && EnoughVolume && EnoughAvgVolume && UpTrend && HaveMomentum && MomentumIncreasing && NOT Bear;
 Sell = DownTrend && LostMomentum;
 
 //Position Sizing
