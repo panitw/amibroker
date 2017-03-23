@@ -1,0 +1,30 @@
+//SetOptions
+SetOption("InitialEquity", 100000);
+SetOption("MaxOpenPositions", 20);
+SetOption("MinShares", 100);
+RoundLotSize = 100;
+SetOption("CommissionMode", 1); //1 = Percent Of Trade
+SetOption("CommissionAmount", 0.2);
+SetTradeDelays(0, 0, 0, 0);
+
+//Position Sizing
+SetPositionSize(5, spsPercentOfEquity);
+
+//Signals
+Gap = Open - Ref(Close, -1);
+GapRatio = Gap / Ref(Close, -1);
+YesterdayNegative = Ref(Close, -1) < Ref(Open, -1);
+PriceInRange = Close < 50;
+EnoughVolume = Volume > 1000000;
+EnoughAvgVolume = MA(Volume, 20) > 500000;
+
+SET = Foreign("SET","Close",True);
+Bear = SET < MA(SET, 150);
+BuyPrice = Open;
+SellPrice = Close;
+Buy = PriceInRange && EnoughVolume && EnoughAvgVolume && Gap > 0 && YesterdayNegative && NOT Bear;
+Sell = True;
+
+
+//Position Score
+PositionScore =  GapRatio * -1;
