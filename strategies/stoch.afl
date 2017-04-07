@@ -35,8 +35,7 @@ SetPositionSize(5, spsPercentOfEquity);
 PositionScore =  StochK(14, 3);
 
 //Apply Stop
-stopPoint = LLV(Close, 27);
-ApplyStop(stopTypeTrailing, stopModePoint, stopPoint, 2, True, 1);
+ApplyStop(stopTypeTrailing, stopModePercent, 25, 2, True, 1);
 
 //Add column for display
 Filter= Buy;
