@@ -8,6 +8,17 @@ SetOption("CommissionMode", 1); //1 = Percent Of Trade
 SetOption("CommissionAmount", 0.2);
 SetTradeDelays(1, 1, 0, 0);
 
+//Optimization Parameter
+//shortDI = Optimize("ShortDI", 7, 1, 14, 1);
+shortDI = 7;
+//longDI = Optimize("LongDI", 20, 10, 20, 1);
+longDI = 10;
+
+//highMomentum = Optimize("HighMomentum", 80, 10, 90, 5);
+highMomentum = 80;
+//lowMomentum = Optimize("LowMomentum", 50, 10, 80, 5);
+lowMomentum = 50;
+
 //Signals
 Stoch = StochK(14,3);
 BuyPrice = Close;
@@ -16,13 +27,13 @@ PriceInRange = Close < 50;
 PositiveClose = Close > Open;
 EnoughVolume = Volume > 1000000;
 EnoughAvgVolume = MA(Volume, 20) > 500000;
-HaveMomentum = Stoch > 80;
-LostMomentum = Stoch < 70;
+HaveMomentum = Stoch > highMomentum;
+LostMomentum = Stoch < lowMomentum;
 MomentumIncreasing = Stoch > Ref(Stoch, -1);
-PlusDIS = PDI(7);
-MinusDIS = MDI(7);
-PlusDIL = PDI(20);
-MinusDIL = MDI(20);
+PlusDIS = PDI(shortDI);
+MinusDIS = MDI(shortDI);
+PlusDIL = PDI(longDI);
+MinusDIL = MDI(longDI);
 UpTrend = PlusDIS > MinusDIS;
 DownTrend = PlusDIL < MinusDIL;
 YesterdayDownTrend = Ref(PlusDIS,-1) < Ref(MinusDIS,-1);
