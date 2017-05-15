@@ -19,6 +19,8 @@ highMomentum = 80;
 //lowMomentum = Optimize("LowMomentum", 50, 10, 80, 5);
 lowMomentum = 50;
 
+stopPercent = Optimize("StopPercent", 25, 10, 30, 2);
+
 //Signals
 Stoch = StochK(14,3);
 BuyPrice = Close;
@@ -49,7 +51,7 @@ SetPositionSize(5, spsPercentOfEquity);
 PositionScore =  StochK(14, 3);
 
 //Apply Stop
-ApplyStop(stopTypeTrailing, stopModePercent, 25, 2, True, 1);
+ApplyStop(stopTypeTrailing, stopModePercent, stopPercent, 2, True, 1);
 
 //Add column for display
 Filter= Buy;

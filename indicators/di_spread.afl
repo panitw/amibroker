@@ -1,0 +1,9 @@
+period = Param("PDI/MDI Period", 14, 1, 200, 1);
+maPeriod = Param("MA Period", 10, 1, 300, 1);
+PlusDI = PDI(period);
+MinusDI = MDI(period);
+Spread = PlusDI - MinusDI;
+SpreadMA = MA(Spread, maPeriod);
+Plot(Spread, "DI_Spread("+WriteVal(period,1.0)+")", ParamColor("Spread Color", colorRed));
+Plot(SpreadMA, "DI_Spread_MA("+WriteVal(maPeriod,1.0)+")", ParamColor("MA Color", colorBlue));
+Plot(0, "Zero", ParamColor("Zero Line Color", colorGreen));

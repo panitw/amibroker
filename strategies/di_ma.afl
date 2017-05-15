@@ -1,0 +1,51 @@
+//SetOptions
+SetOption("InitialEquity", 100000);
+SetOption("MaxOpenPositions", 20);
+SetOption("MinShares", 100);
+RoundLotSize = 100;
+
+SetOption("CommissionMode", 1); //1 = Percent Of Trade
+SetOption("CommissionAmount", 0.2);
+SetTradeDelays(1, 0, 0, 0);
+
+//Signals
+BuyPrice = Open;
+SellPrice = Close;
+PlusDI = PDI(14);
+MinusDI = MDI(14);
+DISpread = PlusDI - MinusDI;
+DISpread_m1 = Ref(DISpread, -1);
+DISpread_m2 = Ref(DISpread, -2);
+DISpreadMA = MA(DISpread, 20);
+DISpreadMA_m1 = Ref(DISpreadMA, -1);
+DISpreadMA_m2 = Ref(DISpreadMA, -2);
+SET = Foreign("SET","Close",True);
+Bull = SET >= MA(SET, 20);
+EnoughAvgVolume = MA(Volume, 20) > 500000;
+PriceInRange = Close < 50;
+
+UnderZero = DISpread < 0 AND DISpreadMA < 0 AND DISpread_m1 < 0 AND DISpreadMA_m1 < 0 AND DISpread_m2 < 0 AND DISpreadMA_m2 < 0;
+Crossing = DISpread > DISpreadMA;
+PrevNotCrossing_m1 = DISpread_m1 < DISpreadMA_m1;
+PrevNotCrossing_m2 = DISpread_m2 < DISpreadMA_m2;
+
+Buy = UnderZero AND Crossing AND PrevNotCrossing_m1 AND PrevNotCrossing_m2 AND Bull AND EnoughAvgVolume AND PriceInRange;
+Sell = DISpread_m1 > 0 AND DISpreadMA_m1 > 0 AND DISpread <= 0;
+
+//Position Sizing
+SetPositionSize(5, spsPercentOfEquity);
+
+//Position Score
+PositionScore = DISpread * -1;
+
+//Apply Stop
+ApplyStop(stopTypeTrailing, stopModePercent, 10, 2, True, 1);
+
+//Add column for display
+Filter= Buy;
+AddColumn(Close, "Close");
+AddColumn(Volume, "Volume");
+AddColumn(IIf( Buy, 66, 83 ), "Signal", formatChar );
+AddColumn(PositionScore, "Score");
+AddColumn(PlusDI, "+DI");
+AddColumn(MinusDI, "-DI");

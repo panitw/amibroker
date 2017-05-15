@@ -6,27 +6,19 @@ RoundLotSize = 100;
 
 SetOption("CommissionMode", 1); //1 = Percent Of Trade
 SetOption("CommissionAmount", 0.2);
-SetTradeDelays(1, 1, 0, 0);
-
-//Market Condition
-SET = Foreign("SET","Close",True);
-Bear = SET < MA(SET, 100);
+SetTradeDelays(1, 2, 0, 0);
 
 //Optimization
-//SpikePercentage = Optimize("Spike Percentage", 750, 200, 2000, 50); 
-BackPeriod = Optimize("BackPeriod", 180, 10, 200, 5); 
+SpikePercentage = Optimize("Spike Percentage", 100, 200, 2000, 50);
+BackPeriod = Optimize("BackPeriod", 50, 10, 200, 5); 
 
 //Signals
-MedVolume = Median(Volume, BackPeriod);
-EnoughVolume = MedVolume > 100000;
-VolSpike = Cross(Volume, MedVolume);
-SpikeSize = ((Volume - MedVolume) / MedVolume) * 100;
-PositiveClose = Close > Open;
+MedVolume = MA(Volume, BackPeriod);
 PrevVol = Ref(Volume, -1);
-PrevVolNotZero = PrevVol > 0;
-Buy = VolSpike && PositiveClose && EnoughVolume && PrevVolNotZero && NOT Bear && SpikeSize > 750;
+SpikeSize = ((Volume - MedVolume) / MedVolume) * 100;
+Buy = PrevVol > 0 && SpikeSize > SpikePercentage;
 BuyPrice = Open;
-Sell = 0;
+Sell = Buy;
 SellPrice = Open;
 
 //Position Sizing
@@ -34,9 +26,6 @@ SetPositionSize(5, spsPercentOfEquity);
 
 //Position Score
 PositionScore =  SpikeSize * -1;
-
-//Apply Stop
-ApplyStop(stopTypeTrailing, stopModePercent, 15, 2, True, 1);
 
 //Add column for display
 Filter= Buy;

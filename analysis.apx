@@ -2,14 +2,14 @@
 <AmiBroker-Analysis CompactMode="0">
 <General>
 <FormatVersion>1</FormatVersion>
-<Symbol>DIF</Symbol>
-<FormulaPath>D:\\projects\\amibroker\\strategies\\stoch.afl</FormulaPath>
-<FormulaContent>//SetOptions\r\nSetOption("InitialEquity", 100000);\r\nSetOption("MaxOpenPositions", 20);\r\nSetOption("MinShares", 100);\r\nRoundLotSize = 100;\r\n\r\nSetOption("CommissionMode", 1); //1 = Percent Of Trade\r\nSetOption("CommissionAmount", 0.2);\r\nSetTradeDelays(1, 1, 0, 0);\r\n\r\n//Signals\r\nStoch = StochK(14,3);\r\nBuyPrice = Close;\r\nSellPrice = Open;\r\nPriceInRange = Close &lt; 50;\r\nPositiveClose = Close &gt; Open;\r\nEnoughVolume = Volume &gt; 1000000;\r\nEnoughAvgVolume = MA(Volume, 20) &gt; 500000;\r\nHaveMomentum = Stoch &gt; 80;\r\nLostMomentum = Stoch &lt; 50;\r\nMomentumIncreasing = Stoch &gt; Ref(Stoch, -1);\r\nPlusDI = PDI(14);\r\nMinusDI = MDI(14);\r\nUpTrend = PlusDI &gt; MinusDI;\r\nDownTrend = PlusDI &lt; MinusDI;\r\nSET = Foreign("SET","Close",True);\r\nBear = SET &lt; MA(SET, 150);\r\nBuy = PriceInRange &amp;&amp; EnoughVolume &amp;&amp; EnoughAvgVolume &amp;&amp; UpTrend &amp;&amp; HaveMomentum &amp;&amp; MomentumIncreasing &amp;&amp; NOT Bear;\r\nSell = DownTrend &amp;&amp; LostMomentum;\r\n\r\n//Position Sizing\r\nSetPositionSize(5, spsPercentOfEquity);\r\n\r\n//Position Score\r\nPositionScore =  StochK(14, 3);\r\n\r\n//Apply Stop\r\nstopPoint = LLV(Close, 27);\r\nApplyStop(stopTypeTrailing, stopModePoint, stopPoint, 2, True, 1);\r\n\r\n//Add column for display\r\nFilter= Buy;\r\nAddColumn(Close, "Close");\r\nAddColumn(Volume, "Volume");\r\nAddColumn(IIf( Buy, 66, 83 ), "Signal", formatChar );\r\nAddColumn(PositionScore, "Score");\r\nAddColumn(StochK(14,3), "Momentum");\r\nAddColumn(UpTrend, "UpTrend");\r\nAddColumn(PlusDI, "+DI");\r\nAddColumn(MinusDI, "-DI");\r\n</FormulaContent>
+<Symbol>SEAFCO</Symbol>
+<FormulaPath>C:\\projects\\amibroker\\strategies\\stoch.afl</FormulaPath>
+<FormulaContent>//SetOptions\r\nSetOption("InitialEquity", 100000);\r\nSetOption("MaxOpenPositions", 20);\r\nSetOption("MinShares", 100);\r\nRoundLotSize = 100;\r\n\r\nSetOption("CommissionMode", 1); //1 = Percent Of Trade\r\nSetOption("CommissionAmount", 0.2);\r\nSetTradeDelays(1, 1, 0, 0);\r\n\r\n//Optimization Parameter\r\n//shortDI = Optimize("ShortDI", 7, 1, 14, 1);\r\nshortDI = 7;\r\n//longDI = Optimize("LongDI", 20, 10, 20, 1);\r\nlongDI = 10;\r\n\r\n//highMomentum = Optimize("HighMomentum", 80, 10, 90, 5);\r\nhighMomentum = 80;\r\n//lowMomentum = Optimize("LowMomentum", 50, 10, 80, 5);\r\nlowMomentum = 50;\r\n\r\n//Signals\r\nStoch = StochK(14,3);\r\nBuyPrice = Close;\r\nSellPrice = Open;\r\nPriceInRange = Close &lt; 50;\r\nPositiveClose = Close &gt; Open;\r\nEnoughVolume = Volume &gt; 1000000;\r\nEnoughAvgVolume = MA(Volume, 20) &gt; 500000;\r\nHaveMomentum = Stoch &gt; highMomentum;\r\nLostMomentum = Stoch &lt; lowMomentum;\r\nMomentumIncreasing = Stoch &gt; Ref(Stoch, -1);\r\nPlusDIS = PDI(shortDI);\r\nMinusDIS = MDI(shortDI);\r\nPlusDIL = PDI(longDI);\r\nMinusDIL = MDI(longDI);\r\nUpTrend = PlusDIS &gt; MinusDIS;\r\nDownTrend = PlusDIL &lt; MinusDIL;\r\nYesterdayDownTrend = Ref(PlusDIS,-1) &lt; Ref(MinusDIS,-1);\r\nSET = Foreign("SET","Close",True);\r\nBear = SET &lt; MA(SET, 150);\r\nBuy = PriceInRange &amp;&amp; EnoughVolume &amp;&amp; EnoughAvgVolume &amp;&amp; YesterdayDownTrend &amp;&amp; UpTrend &amp;&amp; HaveMomentum &amp;&amp; MomentumIncreasing &amp;&amp; NOT Bear;\r\nSell = DownTrend &amp;&amp; LostMomentum;\r\n\r\n//Position Sizing\r\nSetPositionSize(5, spsPercentOfEquity);\r\n\r\n//Position Score\r\nPositionScore =  StochK(14, 3);\r\n\r\n//Apply Stop\r\nApplyStop(stopTypeTrailing, stopModePercent, 25, 2, True, 1);\r\n\r\n//Add column for display\r\nFilter= Buy;\r\nAddColumn(Close, "Close");\r\nAddColumn(Volume, "Volume");\r\nAddColumn(IIf( Buy, 66, 83 ), "Signal", formatChar );\r\nAddColumn(PositionScore, "Score");\r\nAddColumn(StochK(14,3), "Momentum");\r\nAddColumn(UpTrend, "UpTrend");\r\nAddColumn(PlusDIS, "+DI Short");\r\nAddColumn(MinusDIS, "-DI Short");\r\nAddColumn(PlusDIL, "+DI Long");\r\nAddColumn(MinusDIL, "-DI Long");\r\n</FormulaContent>
 <ApplyTo>2</ApplyTo>
-<RangeType>1</RangeType>
+<RangeType>3</RangeType>
 <RangeAmount>1</RangeAmount>
-<FromDate>01/01/2006 00:00:00</FromDate>
-<ToDate>31/12/2017</ToDate>
+<FromDate>2006-01-01 00:00:00</FromDate>
+<ToDate>2017-12-31</ToDate>
 <SyncOnSelect>1</SyncOnSelect>
 <RunEvery>0</RunEvery>
 <RunEveryInterval>5min</RunEveryInterval>
@@ -89,10 +89,10 @@
 <UseConstantPriceArrays>0</UseConstantPriceArrays>
 <PointsOnlyTest>0</PointsOnlyTest>
 <AllowShrinkingPosition>0</AllowShrinkingPosition>
-<RangeType>1</RangeType>
+<RangeType>3</RangeType>
 <RangeLength>0</RangeLength>
-<RangeFromDate>01/01/2006 00:00:00</RangeFromDate>
-<RangeToDate>31/12/2017</RangeToDate>
+<RangeFromDate>2006-01-01 00:00:00</RangeFromDate>
+<RangeToDate>2017-12-31</RangeToDate>
 <ApplyTo>2</ApplyTo>
 <FilterQty>2</FilterQty>
 <IncludeFilter>
@@ -136,10 +136,10 @@
 <Category6>-1</Category6>
 </ExcludeFilter>
 <UseOptimizedEvaluation>0</UseOptimizedEvaluation>
-<BacktestRangeType>1</BacktestRangeType>
+<BacktestRangeType>3</BacktestRangeType>
 <BacktestRangeLength>0</BacktestRangeLength>
-<BacktestRangeFromDate>01/01/2006 00:00:00</BacktestRangeFromDate>
-<BacktestRangeToDate>31/12/2017</BacktestRangeToDate>
+<BacktestRangeFromDate>2006-01-01 00:00:00</BacktestRangeFromDate>
+<BacktestRangeToDate>2017-12-31</BacktestRangeToDate>
 <MarginRequirement>100</MarginRequirement>
 <SameDayStops>0</SameDayStops>
 <RoundLotSize>100</RoundLotSize>
@@ -148,7 +148,7 @@
 <ReverseSignalForcesExit>1</ReverseSignalForcesExit>
 <NoDefaultColumns>0</NoDefaultColumns>
 <AllowSameBarExit>1</AllowSameBarExit>
-<ExtensiveOptimizationWarning>1</ExtensiveOptimizationWarning>
+<ExtensiveOptimizationWarning>0</ExtensiveOptimizationWarning>
 <WaitForBackfill>0</WaitForBackfill>
 <MaxRanked>4</MaxRanked>
 <MaxTraded>5</MaxTraded>
@@ -213,5 +213,21 @@
 <MCLogScaleFinalEquity>0</MCLogScaleFinalEquity>
 <MCLogScaleDrawdown>0</MCLogScaleDrawdown>
 <MCNegativeDrawdown>1</MCNegativeDrawdown>
+<ISEnabled>1</ISEnabled>
+<ISStartDate>2000-01-01</ISStartDate>
+<ISEndDate>2004-01-01</ISEndDate>
+<ISLastDate>2017-01-01</ISLastDate>
+<ISStep>1</ISStep>
+<ISStepUnit>3</ISStepUnit>
+<ISAnchored>0</ISAnchored>
+<ISLastUsesToday>1</ISLastUsesToday>
+<OSEnabled>1</OSEnabled>
+<OSStartDate>2004-01-01</OSStartDate>
+<OSEndDate>2005-01-01</OSEndDate>
+<OSLastDate>2017-01-01</OSLastDate>
+<OSStep>1</OSStep>
+<OSStepUnit>3</OSStepUnit>
+<OSAnchored>0</OSAnchored>
+<OSLastUsesToday>1</OSLastUsesToday>
 </BacktestSettings>
 </AmiBroker-Analysis>
