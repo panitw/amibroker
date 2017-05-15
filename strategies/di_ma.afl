@@ -8,15 +8,19 @@ SetOption("CommissionMode", 1); //1 = Percent Of Trade
 SetOption("CommissionAmount", 0.2);
 SetTradeDelays(1, 0, 0, 0);
 
+//Optimizaion Parameters
+DIParam = Optimize("DIParam", 14, 1, 20, 1);
+DIMAParam = Optimize("DIMAParam", 20, 2, 30, 1);
+
 //Signals
 BuyPrice = Open;
 SellPrice = Close;
-PlusDI = PDI(14);
-MinusDI = MDI(14);
+PlusDI = PDI(DIParam);
+MinusDI = MDI(DIParam);
 DISpread = PlusDI - MinusDI;
 DISpread_m1 = Ref(DISpread, -1);
 DISpread_m2 = Ref(DISpread, -2);
-DISpreadMA = MA(DISpread, 20);
+DISpreadMA = MA(DISpread, DIMAParam);
 DISpreadMA_m1 = Ref(DISpreadMA, -1);
 DISpreadMA_m2 = Ref(DISpreadMA, -2);
 SET = Foreign("SET","Close",True);
