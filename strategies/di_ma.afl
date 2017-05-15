@@ -6,17 +6,15 @@ RoundLotSize = 100;
 
 SetOption("CommissionMode", 1); //1 = Percent Of Trade
 SetOption("CommissionAmount", 0.2);
-SetTradeDelays(1, 0, 0, 0);
+SetTradeDelays(1, 1, 0, 0);
 
 //Optimizaion Parameters
 DIParam = Optimize("DIParam", 16, 2, 20, 1);
 DIMAParam = Optimize("DIMAParam", 18, 2, 20, 2);
-//DIParam = 14;
-//DIMAParam = 20;
 
 //Signals
-BuyPrice = Open;
-SellPrice = Close;
+BuyPrice = Close;
+SellPrice = Open;
 PlusDI = PDI(DIParam);
 MinusDI = MDI(DIParam);
 DISpread = PlusDI - MinusDI;
@@ -36,7 +34,7 @@ PrevNotCrossing_m1 = DISpread_m1 < DISpreadMA_m1;
 PrevNotCrossing_m2 = DISpread_m2 < DISpreadMA_m2;
 
 Buy = UnderZero AND Crossing AND PrevNotCrossing_m1 AND PrevNotCrossing_m2 AND Bull AND EnoughAvgVolume AND PriceInRange;
-Sell = DISpread_m1 > 0 AND DISpreadMA_m1 > 0 AND DISpread <= 0;
+Sell = DISpreadMA_m2 > 0 AND DISpreadMA_m1 > 0 AND DISpreadMA <= 0;
 
 //Position Sizing
 SetPositionSize(5, spsPercentOfEquity);
