@@ -34,7 +34,7 @@ PrevNotCrossing_m1 = DISpread_m1 < DISpreadMA_m1;
 PrevNotCrossing_m2 = DISpread_m2 < DISpreadMA_m2;
 
 Buy = UnderZero AND Crossing AND PrevNotCrossing_m1 AND PrevNotCrossing_m2 AND Bull AND EnoughAvgVolume AND PriceInRange;
-Sell = DISpreadMA_m2 > 0 AND DISpreadMA_m1 > 0 AND DISpreadMA <= 0;
+Sell = (DISpreadMA_m2 > 0 AND DISpreadMA_m1 > 0 AND DISpreadMA <= 0) OR (DISpread < DISpreadMA AND DISpreadMA < 0 AND DISpread < 0);
 
 //Position Sizing
 SetPositionSize(5, spsPercentOfEquity);
