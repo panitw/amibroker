@@ -46,10 +46,11 @@ PositionScore = DISpread * -1;
 ApplyStop(stopTypeTrailing, stopModePercent, 10, 2, True, 1);
 
 //Add column for display
-Filter= Buy;
+Filter = Buy;
 AddColumn(Close, "Close");
 AddColumn(Volume, "Volume");
 AddColumn(IIf( Buy, 66, 83 ), "Signal", formatChar );
 AddColumn(PositionScore, "Score");
 AddColumn(PlusDI, "+DI");
 AddColumn(MinusDI, "-DI");
+AddColumn(Bull, "IsBull");
